@@ -6,3 +6,7 @@ Points of interest:
 - An assortment of colorschemes
 - Treesitter
 - Nvim tree and toggleterm
+
+Current LSP support:
+- clangd
+- jdtls (in progress)
