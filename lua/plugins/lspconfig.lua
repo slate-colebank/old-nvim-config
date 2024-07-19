@@ -16,13 +16,15 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     config=function()
-    require("mason-lspconfig").setup {
-      ensure_installed = {
-        "clangd",
-        "jdtls"
-      },
-      automatic_installation = true,
-    }
+      require("mason-lspconfig").setup {
+        ensure_installed = {
+          "clangd",
+          "jdtls",
+          "html",
+          "rust_analyzer",
+        },
+        automatic_installation = true,
+      }
     end
   },
   {
@@ -78,6 +80,9 @@ return {
     config = function()
       local lspconfig = require('lspconfig')
 
+      -- capabilities
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
       -- attach function
       local function on_attach(client, bufnr)
         if client.server_capabilities.inlayHintProvider then
@@ -88,12 +93,26 @@ return {
 
       lspconfig.clangd.setup {
         on_attach = on_attach,
+        capabilities = capabilities,
         settings = {},
       }
 
       lspconfig.jdtls.setup {
         on_attach = on_attach,
-        settings = {},
+        capabilities = capabilities,
+      }
+
+      lspconfig.html.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+
+      lspconfig.rust_analyzer.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = {
+          "rustup", "run", "stable", "rust-analyzer",
+        }
       }
     end
   },
