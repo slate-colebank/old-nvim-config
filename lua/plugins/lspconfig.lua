@@ -22,6 +22,8 @@ return {
           "jdtls",
           "html",
           "rust_analyzer",
+          "pylsp",
+          "texlab",
         },
         automatic_installation = true,
       }
@@ -52,7 +54,7 @@ return {
         mapping = {
           ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
         },
 
         window = {
@@ -113,6 +115,16 @@ return {
         cmd = {
           "rustup", "run", "stable", "rust-analyzer",
         }
+      }
+
+      lspconfig.pylsp.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+
+      lspconfig.texlab.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
       }
     end
   },

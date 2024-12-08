@@ -20,6 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup('plugins')
 
 
+
 -- set the lightline coloscheme
 --[[
 vim.g.lightline = {
@@ -95,3 +96,17 @@ vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<BS>"]], {
 -- reset the exit terminal mode keybind
 -- vim.keymap.set('t', '<Esc>', [[<C-\><C-n><C-w><C-w><C-w><C-w>]])
 
+
+-- VimTex Config
+vim.g.vimtex_view_method = 'zathura'  -- Use Zathura as PDF viewer
+vim.g.vimtex_indent_enabled = 1
+vim.g.vimtex_view_general_options = "--synctex-forward @line:@col:@tex"
+vim.g.vimtex_compiler_method = 'latexmk'  -- Use latexmk for compilation
+vim.g.vimtex_quickfix_mode = 0  -- Disable auto-opening quickfix window on errors
+vim.g.tex_flavor = 'latex'  -- Set flavor to LaTeX
+vim.g.vimtex_complete_enabled = 1  -- Enable completion
+
+-- Optional: Custom mappings for VimTeX
+vim.api.nvim_set_keymap('n', '<leader>ll', '<cmd>VimtexCompile<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>lv', '<cmd>VimtexView<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>lc', '<cmd>VimtexClean<CR>', { noremap = true, silent = true })
